@@ -1,0 +1,14 @@
+package com.psl.client;
+
+import com.psl.utility.PurchaseOrderManagerImpl;
+
+
+public class Client {
+
+	public static void main(String[] args) {
+		PurchaseOrderManagerImpl pimpl= new PurchaseOrderManagerImpl();
+		System.out.println(pimpl.populateStoreItems());
+		
+	}
+
+}

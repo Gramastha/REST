@@ -1,0 +1,13 @@
+package com.psl.client;
+
+import com.psl.dao.ConnectionManagerImpl;
+
+public class Client {
+
+	public static void main(String[] args) {
+ConnectionManagerImpl impl= new ConnectionManagerImpl();
+impl.getDBConnection("jdbc:mysql://localhost:3306/ordermgmtdb", "root", "root");
+impl.closeConnection();
+	}
+
+}

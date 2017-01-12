@@ -1,0 +1,103 @@
+package com.psl.utility;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
+import com.psl.beans.Address;
+import com.psl.beans.Customer;
+import com.psl.beans.OrderItem;
+import com.psl.beans.PurchaseOrder;
+import com.psl.beans.StockItem;
+import com.psl.dao.ConnectionManagerImpl;
+
+public class PurchaseOrderManagerImpl implements PurchaseOrderManager{
+
+	@Override
+	public List<Customer> populateCustomers() {
+	List<Customer> custList= new ArrayList<Customer>();
+	ConnectionManagerImpl impl= new ConnectionManagerImpl();
+	Connection con= impl.getDBConnection("jdbc:mysql://localhost:3306/ordermgmtdb", "root", "root");
+	Statement stmt;
+	try {
+		stmt = con.createStatement();
+		ResultSet res= stmt.executeQuery("SELECT * FROM customer_details");
+		while(res.next()){
+			Customer c= new Customer();
+			String address[]= res.getString("address").split(",");
+			c.setAddress(new Address(address[0], address[1], address[2], Integer.parseInt(address[3])));
+			c.setEmail(res.getString("email"));
+			c.setName(res.getString("name"));
+			c.setId(res.getInt("id"));
+			custList.add(c);
+		}
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
+	
+	return custList;
+	}
+
+	@Override
+	public List<StockItem> populateStoreItems() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void createOrder(int cust_id, ArrayList<OrderItem> OrderedItems,
+			Date ship_date) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void storePurchaseOrder() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void shipOrders(int cust_id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Void removeExpiredItems() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Void showItems() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Void applyDiscountOnItems() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Map<Customer, ArrayList<PurchaseOrder>> getOrdersByCustomer() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Void displayDiscountedItemsList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}
